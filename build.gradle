@@ -1,0 +1,92 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
+//    id "com.google.cloud.tools.jib" version "1.4.0"
+    id 'net.ltgt.apt' version '0.21' // For Mapstruct
+    id 'checkstyle'
+}
+
+group 'com.base'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+if (project.hasProperty("prod")) {
+    apply from: "gradle/profile_prod.gradle"
+} else if (project.hasProperty("dev")) {
+    apply from: "gradle/profile_dev.gradle"
+} else {
+    apply from: "gradle/profile_local.gradle"
+}
+
+apply from: 'config/mapstruct.gradle'
+
+defaultTasks "bootRun"
+
+springBoot {
+    mainClassName = "com.base.Application"
+}
+
+ext {
+    springbootVersion = '2.1.3.RELEASE'
+    lombokVersion = '1.18.8'
+    mapstructVersion = '1.3.0.Final'
+    flywayVersion = '5.2.4'
+    oauthVersion = '2.1.3.RELEASE'
+    oauthClientVersion = '5.1.5.RELEASE'
+    oauthJoseVersion = '5.1.5.RELEASE'
+    jwtVersion = '1.0.10.RELEASE'
+    jedisVersion = '2.9.0'
+    commonsLangVersion = '3.0'
+    swaggerVersion = '2.9.2'
+    reflectionsVersion = '0.9.11'
+    jaxbRuntimeVersion = '2.3.1'
+    springContextSupportVersion = '5.1.6.RELEASE'
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-dependencies:$springbootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation "org.springframework.boot:spring-boot-starter-mail"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.springframework:spring-context-support:$springContextSupportVersion"
+    implementation "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$oauthVersion"
+    implementation "org.springframework.security:spring-security-oauth2-client:$oauthClientVersion"
+    implementation "org.springframework.security:spring-security-oauth2-jose:$oauthJoseVersion"
+    implementation "org.springframework.security:spring-security-jwt:$jwtVersion"
+
+    implementation "mysql:mysql-connector-java"
+    implementation "org.flywaydb:flyway-core:$flywayVersion"
+    implementation "redis.clients:jedis:${jedisVersion}"
+    implementation "org.apache.commons:commons-lang3:$commonsLangVersion"
+
+    implementation("io.springfox:springfox-swagger2:$swaggerVersion") { exclude module: 'mapstruct' }
+    implementation "io.springfox:springfox-swagger-ui:$swaggerVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+    implementation "org.reflections:reflections:$reflectionsVersion"
+    implementation "org.glassfish.jaxb:jaxb-runtime:$jaxbRuntimeVersion"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+}
+
+compileJava.dependsOn processResources
