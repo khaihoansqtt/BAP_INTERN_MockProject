@@ -1,6 +1,6 @@
 package com.base.mapper.mapstruct;
 
-import com.base.dto.BaseDTO;
+import com.base.dto.BaseDto;
 import com.base.entity.BaseEntity;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  * @param <DTO>
  * @param <ENTITY>
  */
-public interface BaseMapper<DTO extends BaseDTO, ENTITY extends BaseEntity> {
+public interface BaseMapper<DTO extends BaseDto, ENTITY extends BaseEntity> {
     /**
      * Convert entity to dto
      * @param entity
