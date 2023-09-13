@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseDTO implements Serializable {
+public class BaseDto implements Serializable {
     protected String createByUser;
     protected String createAtTime;
     protected String updateByUser;

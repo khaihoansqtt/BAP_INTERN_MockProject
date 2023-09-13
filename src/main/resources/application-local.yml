@@ -25,9 +25,9 @@ application:
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/basedb?useSSL=false
+    url: jdbc:mysql://localhost:3301/basedb?useSSL=false
     username: root
-    password: 123456
+    password: khaihoan
   jpa:
     properties:
       hibernate:

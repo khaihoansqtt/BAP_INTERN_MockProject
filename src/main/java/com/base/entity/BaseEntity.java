@@ -23,44 +23,23 @@ import java.util.Date;
 @AllArgsConstructor
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity<TID> implements Serializable {
-    /**
-     * The Create by user.
-     */
-    @CreatedBy
-    @Column(name = "created_by_user")
-    protected String createByUser;
+public abstract class BaseEntity implements Serializable {
 
-    /**
-     * The Create at time.
-     */
-    @CreatedDate
-    @Column(name = "created_at")
-    protected Date createAtTime;
+    @Column(name = "CREATE_FUNC_ID")
+    private String createFuncId;
 
-    /**
-     * The Update by user.
-     */
-    @LastModifiedBy
-    @Column(name = "modified_by_user")
-    protected String updateByUser;
+    @Column(name = "CREATE_PERSON_ID")
+    private int createPersonId;
 
-    /**
-     * The Update at time.
-     */
-    @LastModifiedDate
-    @Column(name = "modified_at")
-    protected Date updateAtTime;
+    @Column(name = "CREATE_DATE_TIME")
+    private Date createDateTime;
 
-    /**
-     * The Is deleted.
-     */
-    @Column(name = "is_deleted")
-    protected Boolean isDeleted = false;
+    @Column(name = "UPDATE_FUNC_ID")
+    private String updateFuncId;
 
-    /**
-     *
-     * @return
-     */
-    public abstract TID getId();
+    @Column(name = "UPDATE_PERSON_ID")
+    private int updatePersonId;
+
+    @Column(name = "UPDATE_DATE_TIME")
+    private Date updateDateTime;
 }
