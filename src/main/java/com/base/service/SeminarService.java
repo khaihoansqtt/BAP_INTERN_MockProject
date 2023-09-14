@@ -1,9 +1,8 @@
 package com.base.service;
 
-import com.base.dto.BaseOkResDto;
 import com.base.dto.BaseResDto;
-import com.base.dto.seminar.getSeminars.getSeminarsResDto;
+import com.base.dto.seminar.getSeminars.GetSeminarsResDto;
 
 public interface SeminarService {
-    BaseOkResDto<getSeminarsResDto> getSeminars();
+    BaseResDto<GetSeminarsResDto> getSeminars();
 }

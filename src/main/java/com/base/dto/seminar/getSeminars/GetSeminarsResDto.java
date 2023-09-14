@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class getSeminarsResDto {
+public class GetSeminarsResDto {
     List<SeminarDto> seminars;
 }

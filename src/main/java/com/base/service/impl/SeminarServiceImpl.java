@@ -1,25 +1,29 @@
 package com.base.service.impl;
 
-import com.base.dto.BaseOkResDto;
-import com.base.dto.seminar.getSeminars.getSeminarsResDto;
+import com.base.dto.BaseResDto;
+import com.base.dto.seminar.getSeminars.GetSeminarsResDto;
+import com.base.dto.seminar.getSeminars.SeminarDto;
 import com.base.entity.TTSeminar;
 import com.base.repository.SeminarRepository;
 import com.base.service.SeminarService;
-import com.base.spring.exception.NoSeminarExisted;
+import com.base.spring.exception.NoSeminarExistedException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SeminarServiceImpl implements SeminarService {
     @Autowired
     SeminarRepository seminarRepository;
     @Override
-    public BaseOkResDto<getSeminarsResDto> getSeminars() {
+    public BaseResDto<GetSeminarsResDto> getSeminars() {
         Optional<List<TTSeminar>> seminarListOptional = seminarRepository.findAllByIsDeletedIsFalse();
-        if (seminarListOptional.isPresent()) {
-            List<TTSeminar> seminarList = seminarListOptional.get();
 
-        } else throw new NoSeminarExisted();
+        if (seminarListOptional.isPresent()) {
+            List<TTSeminar> seminars = seminarListOptional.get();
+            List<SeminarDto> seminarDtos = seminars.stream().map(SeminarDto::new).collect(Collectors.toList());
+            return BaseResDto.ok(new GetSeminarsResDto(seminarDtos));
+        } else throw new NoSeminarExistedException();
     }
 }
