@@ -77,8 +77,11 @@ public class TTSeminar extends BaseEntity {
     private TTSeminarImage ttSeminarImage;
 
     @OneToMany(mappedBy = "ttSeminar", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    private TTSeminarApplication ttSeminarApplication;
+    private List<TTSeminarApplication> ttSeminarApplication;
 
     @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
     private TRSeminarIcon trSeminarIcon;
+
+    @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
+    private TTSeminarMailInfo ttSeminarMailInfo;
 }

@@ -18,27 +18,26 @@ public class BaseResDto<T> {
 	private List<ErrorDto> errors;
 	private T result;
 
+	public BaseResDto(int status, ErrorDto error) {
+		this.status = status;
+		errors = new ArrayList<>();
+		errors.add(error);
+	}
+
 	public BaseResDto(int status, T result) {
 		this.status = status;
 		this.result = result;
 	}
 
-	public BaseResDto(int status, List<ErrorDto> errors) {
-		this.status = status;
-		this.errors = errors;
-	}
-
-	public static <T> BaseResDto<T> build(HttpStatus status, T result) {
-		return new BaseResDto<>(status.value(), result);
-	};
-
 	public static <T> BaseResDto<T> ok(T result) {
 		return new BaseResDto<>(HttpStatus.OK.value(), result);
-	};
+	}
 
-	public static <T> BaseResDto<T> error(HttpStatus status, ErrorDto errorDto) {
-		List<ErrorDto> errors = new ArrayList<>();
-		errors.add(errorDto);
-		return new BaseResDto<>(status.value(), errors);
-	};
+	public static BaseResDto badRequest(ErrorDto error) {
+		return new BaseResDto(HttpStatus.BAD_REQUEST.value(), error);
+	}
+
+	public static BaseResDto serverError(ErrorDto error) {
+		return new BaseResDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), error);
+	}
 }

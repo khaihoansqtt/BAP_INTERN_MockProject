@@ -27,7 +27,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TRSeminarIcon {
+public class TRSeminarIcon extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
