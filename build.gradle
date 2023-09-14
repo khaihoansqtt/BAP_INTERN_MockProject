@@ -65,6 +65,11 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-jose:$oauthJoseVersion"
     implementation "org.springframework.security:spring-security-jwt:$jwtVersion"
 
+//    implementation "io.jsonwebtoken:jjwt:0.11.5"
+    implementation "io.jsonwebtoken:jjwt-api:0.11.5"
+    implementation "io.jsonwebtoken:jjwt-impl:0.11.5"
+    implementation "io.jsonwebtoken:jjwt-jackson:0.11.5"
+
     implementation "mysql:mysql-connector-java"
     implementation "org.flywaydb:flyway-core:$flywayVersion"
     implementation "redis.clients:jedis:${jedisVersion}"

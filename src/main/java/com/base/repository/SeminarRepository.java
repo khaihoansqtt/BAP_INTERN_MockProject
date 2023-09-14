@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface SeminarRepository extends JpaRepository<TTSeminar, Integer> {
     Optional<TTSeminar> findAllByIsDeleteFalse();
-    Optional<List<TTSeminar>> findAllByIsDeletedIsFalse();
+    Optional<List<TTSeminar>> findAllByIsDeleteIsFalse();
 }

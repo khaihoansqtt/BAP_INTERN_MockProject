@@ -27,6 +27,7 @@ public class BaseResDto<T> {
 	public BaseResDto(int status, T result) {
 		this.status = status;
 		this.result = result;
+		this.errors = new ArrayList<>();
 	}
 
 	public static <T> BaseResDto<T> ok(T result) {

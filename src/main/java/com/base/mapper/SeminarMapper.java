@@ -28,5 +28,4 @@ public class SeminarMapper {
 ////    }
 //    public static List<SeminarDto> toListDto(List<TTSeminar> seminars) {
 //        seminars.
-//    }
-}
+    }

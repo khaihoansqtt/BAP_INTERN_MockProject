@@ -22,16 +22,16 @@ public class TTSeminarMailInfo extends BaseEntity {
     private int seminarMailInfoId;
 
     @Column(name = "MAIL_CATEGORY")
-    private boolean mailCategory;
+    private int mailCategory;
 
     @Column(name = "OPTIONAL_MESSAGE_HALL")
-    private boolean optionalMessageHall;
+    private String optionalMessageHall;
 
     @Column(name = "OPTIONAL_MESSAGE_ONLINE")
-    private Date optionalMessageOnline;
+    private String optionalMessageOnline;
 
     @Column(name = "IS_DELETE")
-    private Date isDelete;
+    private boolean isDelete;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")

@@ -2,6 +2,7 @@ package com.base.dto.seminar.getSeminars;
 
 import com.base.entity.TTSeminar;
 import com.base.entity.TTSeminarApplication;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,10 +32,11 @@ public class SeminarDto {
     private String listOverview;
 
     @JsonProperty("event_startdate")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date eventStartdate;
 
     @JsonProperty("event_enddate")
-    private Date eventEndDate;
+    private Date eventEnddate;
 
     @JsonProperty("publication_start_date_time")
     private Date publicationStartDateTime;
@@ -54,7 +56,7 @@ public class SeminarDto {
         seminarId = seminar.getSeminarId();
         listOverview = seminar.getListOverview();
         eventStartdate = seminar.getEventStartdate();
-        eventEndDate = seminar.getEventEndDate();
+        eventEnddate = seminar.getEventEnddate();
         publicationStartDateTime = seminar.getPublicationStartDateTime();
         publicationEndDateTime = seminar.getPublicationEndDateTime();
         seminarApplicationInfo = buildSeminarApplictionInfo(seminar);

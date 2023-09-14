@@ -3,18 +3,7 @@ package com.base.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,11 +31,12 @@ public class TTSeminar extends BaseEntity {
     @Column(name = "IS_ONLINE_SEMINAR")
     private boolean isOnlineSeminar;
 
-    @Column(name = "EVENT_STARTDATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "EVENT_STARTDATE", columnDefinition = "DATETIME")
     private Date eventStartdate;
 
     @Column(name = "EVENT_ENDDATE")
-    private Date eventEndDate;
+    private Date eventEnddate;
 
     @Column(name = "PUBLICATION_START_DATE_TIME")
     private Date publicationStartDateTime;
