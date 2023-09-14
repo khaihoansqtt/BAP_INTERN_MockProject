@@ -27,32 +27,32 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TTSeminarDetail {
+public class TTSeminarDetail extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SEMINAR_DETAIL_ID")
     private int seminarDetailId;
 
     @Column(name = "DISPLAY_ORDER")
-    private boolean displayOrder;
+    private int displayOrder;
 
     @Column(name = "HEADLINE")
-    private Date headline;
+    private String headline;
 
     @Column(name = "CONTENTS")
-    private Date contents;
+    private String contents;
 
     @Column(name = "IS_DELETE")
-    private Date isDelete;
+    private boolean isDelete;
 
     @Column(name = "CREATE_FUNC_ID")
-    private Date createFuncId;
+    private String createFuncId;
 
     @Column(name = "CREATE_PERSON_ID")
-    private String createPersonId;
+    private int createPersonId;
 
     @Column(name = "CREATE_DATE_TIME")
-    private int createDateTime;
+    private Date createDateTime;
 
     @Column(name = "UPDATE_FUNC_ID")
     private String updateFuncId;
@@ -61,7 +61,7 @@ public class TTSeminarDetail {
     private int updatePersonId;
 
     @Column(name = "UPDATE_DATE_TIME")
-    private boolean updateDateTime;
+    private Date updateDateTime;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")

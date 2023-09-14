@@ -1,13 +1,11 @@
-package com.base.dto.adminCreateSeminar;
+package com.base.dto.seminar.adminCreateSeminar;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class AdminCreateSeminarReqDto {
 
