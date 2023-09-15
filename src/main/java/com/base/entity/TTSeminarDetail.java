@@ -66,8 +66,4 @@ public class TTSeminarDetail extends BaseEntity {
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")
     private TTSeminar ttSeminar;
-
-    @OneToOne( cascade = {CascadeType.ALL})
-    @JoinColumn(name = "SEMINAR_IMAGE_ID")
-    private TTSeminarImage ttSeminarImage;
 }

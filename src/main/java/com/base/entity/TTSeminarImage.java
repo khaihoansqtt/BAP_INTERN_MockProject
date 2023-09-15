@@ -46,9 +46,6 @@ public class TTSeminarImage extends BaseEntity {
     @Column(name = "IS_DELETE")
     private boolean isDelete;
 
-    @OneToOne(mappedBy = "ttSeminarImage", cascade = {CascadeType.ALL})
-    private TTSeminarDetail ttSeminarDetail;
-
     @OneToOne( cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")
     private TTSeminar ttSeminar;

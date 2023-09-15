@@ -27,9 +27,6 @@ public class SeminarServiceImpl implements SeminarService {
         if (seminarListOptional.isPresent()) {
             List<TTSeminar> seminars = seminarListOptional.get();
 
-            TimeZone defaultTimeZone = TimeZone.getDefault();
-            System.out.println("Default Time Zone: " + defaultTimeZone.getID());
-
             List<SeminarDto> seminarDtos = seminars.stream().map(SeminarDto::new).collect(Collectors.toList());
             return BaseResDto.ok(new GetSeminarsResDto(seminarDtos));
         } else throw new NoSeminarExistedException();
