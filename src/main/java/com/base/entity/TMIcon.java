@@ -27,6 +27,6 @@ public class TMIcon extends BaseEntity {
     @Column(name = "IS_DELETE")
     private boolean isDelete;
 
-    @OneToOne(mappedBy = "tmIcon", cascade = {CascadeType.ALL})
-    private TRSeminarIcon trSeminarIcon;
+    @OneToMany(mappedBy = "tmIcon", cascade = {CascadeType.ALL})
+    private List<TRSeminarIcon> trSeminarIcons;
 }

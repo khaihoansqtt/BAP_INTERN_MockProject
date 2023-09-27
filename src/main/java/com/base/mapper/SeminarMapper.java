@@ -1,13 +1,5 @@
 package com.base.mapper;
 
-import com.base.dto.seminar.getSeminars.SeminarApplicationDto;
-import com.base.dto.seminar.getSeminars.SeminarDto;
-import com.base.entity.TTSeminar;
-import com.base.entity.TTSeminarApplication;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class SeminarMapper {
 
 //    public static SeminarDto toSeminarDto(TTSeminar seminar) {

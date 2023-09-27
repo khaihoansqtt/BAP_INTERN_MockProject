@@ -11,14 +11,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class handleExceptionController {
 
     @ExceptionHandler()
-    protected ResponseEntity<?> handleBadRequest(NoSeminarExistedException ex) {
-        ErrorDto errorDto = new ErrorDto("E12", "There are currently no seminars planned");
+    protected ResponseEntity<?> handleNoSeminarExistedException(NoSeminarExistedException ex) {
+        ErrorDto errorDto = new ErrorDto("E12", ex.getMessage());
         return new ResponseEntity<>(BaseResDto.badRequest(errorDto), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler()
-    protected ResponseEntity<Object> handleInternalServerError(RuntimeException ex) {
-        ErrorDto errorDto = new ErrorDto("E0", "Internal Server Error");
-        return new ResponseEntity<>(BaseResDto.badRequest(errorDto), HttpStatus.INTERNAL_SERVER_ERROR);
+    protected ResponseEntity<?> handleSeminarTimeException(SeminarTimeException ex) {
+        ErrorDto errorDto = new ErrorDto("E8", ex.getMessage());
+        return new ResponseEntity<>(BaseResDto.badRequest(errorDto), HttpStatus.BAD_REQUEST);
     }
+
+//    @ExceptionHandler()
+//    protected ResponseEntity<Object> handleInternalServerError(RuntimeException ex) {
+//        ErrorDto errorDto = new ErrorDto("E0", "Internal Server Error");
+//        return new ResponseEntity<>(BaseResDto.badRequest(errorDto), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

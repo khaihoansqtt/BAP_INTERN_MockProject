@@ -16,10 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TR_SEMINAR_ICON")
@@ -27,6 +25,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class TRSeminarIcon extends BaseEntity {
 
     @Id
@@ -37,11 +36,11 @@ public class TRSeminarIcon extends BaseEntity {
     @Column(name = "IS_DELETE")
     private boolean isDelete;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")
     private TTSeminar ttSeminar;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "ICON_ID")
     private TMIcon tmIcon;
 }

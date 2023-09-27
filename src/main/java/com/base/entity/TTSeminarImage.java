@@ -16,10 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TT_SEMINAR_IMAGE")
@@ -27,15 +25,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class TTSeminarImage extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SEMINAR_IMAGE_ID")
     private int seminarImageId;
 
-    // co the co quan he
     @Column(name = "IMAGE_CATEGORY")
     private int imageCategory;
+
+    @Column(name = "DISPLAY_ORDER")
+    private int displayOrder;
 
     @Column(name = "FILE_NAME")
     private String fileName;
@@ -46,7 +47,7 @@ public class TTSeminarImage extends BaseEntity {
     @Column(name = "IS_DELETE")
     private boolean isDelete;
 
-    @OneToOne( cascade = {CascadeType.ALL})
+    @ManyToOne( cascade = {CascadeType.ALL})
     @JoinColumn(name = "SEMINAR_ID")
     private TTSeminar ttSeminar;
 }

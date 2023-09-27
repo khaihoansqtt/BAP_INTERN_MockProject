@@ -1,4 +1,4 @@
-package com.base.dto.seminar.getSeminars;
+package com.base.dto.seminar.adminGetSeminars;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class GetSeminarsResDto {
+public class AdminGetSeminarsResDto {
     List<SeminarDto> seminars;
 }

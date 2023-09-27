@@ -1,4 +1,4 @@
-package com.base.dto.seminar.getSeminars;
+package com.base.dto.seminar.adminGetSeminars;
 
 import com.base.entity.TTSeminar;
 import com.base.entity.TTSeminarApplication;
@@ -8,9 +8,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.util.Pair;
 import org.springframework.util.StopWatch;
-import reactor.util.function.Tuple2;
 
-import javax.persistence.Tuple;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,39 +64,36 @@ public class SeminarDto {
         eventEnddate = seminar.getEventEnddate();
         publicationStartDateTime = seminar.getPublicationStartDateTime();
         publicationEndDateTime = seminar.getPublicationEndDateTime();
-        //seminarApplicationInfo = buildSeminarApplictionInfo(seminar);
+        seminarApplicationInfo = buildSeminarApplictionInfo(seminar);
     }
 
     public List<Map<String, Integer>> buildSeminarApplictionInfo(TTSeminar seminar) {
-        List<TTSeminarApplication> seminarApplications = seminar.getTtSeminarApplication();
+        List<TTSeminarApplication> seminarApplications = seminar.getTtSeminarApplications();
 
         // Lưu count category dưới dạng key: mã category, value: số lượng đếm được
         Map<Integer, Integer> countCategory = new HashMap<>();
-        StopWatch checkTime = new StopWatch();
-//        checkTime.start();
-//        var a = seminar.getTtSeminarApplication()
-//                .stream()
-//                .collect(Collectors.groupingBy(
-//                        seminarApplication -> seminarApplication.getSeminarApplicationCategory(),
-//                        Collectors.toList()
-//                ))
-//                .entrySet()
-//                .stream()
-//                .map(e -> Pair.of(e.getKey(), e.getValue().size()))
-//                .collect(Collectors.toList());
-//        checkTime.stop();
-
-//        log.info("aaaaa: {}, in time1: {}", a, checkTime.getTotalTimeMillis());
-        checkTime.start();
-        for (TTSeminarApplication seminarApplication : seminarApplications) {
-            int categoryKey = seminarApplication.getSeminarApplicationCategory();
-            if (countCategory.containsKey(categoryKey)) {
-                int newCount = countCategory.get(categoryKey) + 1;
-                countCategory.put(categoryKey, newCount);
-            } else {
-                countCategory.put(categoryKey, 1);
-            }
-        }
+        countCategory = seminar.getTtSeminarApplications()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        seminarApplication -> seminarApplication.getSeminarApplicationCategory(),
+                        Collectors.toList()
+                ))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().size()
+                ));
+//      Cách đếm thủ công
+//        for (TTSeminarApplication seminarApplication : seminarApplications) {
+//            int categoryKey = seminarApplication.getSeminarApplicationCategory();
+//            if (countCategory.containsKey(categoryKey)) {
+//                int newCount = countCategory.get(categoryKey) + 1;
+//                countCategory.put(categoryKey, newCount);
+//            } else {
+//                countCategory.put(categoryKey, 1);
+//            }
+//        }
 
         List<Map<String, Integer>> seminarApplicationInfo = new ArrayList<>();
         for (Integer key : countCategory.keySet()) {
@@ -107,9 +102,6 @@ public class SeminarDto {
             info.put("seminar_application_category", key);
             seminarApplicationInfo.add(info);
         }
-        checkTime.stop();
-
-        log.info("in time2: {}", checkTime.getTotalTimeMillis());
         return seminarApplicationInfo;
     }
 }

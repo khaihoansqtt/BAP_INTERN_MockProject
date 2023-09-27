@@ -5,10 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "TT_SEMINAR")
@@ -16,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public class TTSeminar extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,25 +52,25 @@ public class TTSeminar extends BaseEntity {
     @Column(name = "ONLINE_VIEW_URL")
     private String onlineViewUrl;
 
-    //		cos quan he
-    @Column(name = "QUESTIONNAIRE_ID")
-    private int questionnaireId;
-
     @Column(name = "IS_DELETE")
     private boolean isDelete;
 
     @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
     private TTSeminarDetail ttSeminarDetail;
 
-    @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
-    private TTSeminarImage ttSeminarImage;
+    @OneToMany(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
+    private List<TTSeminarImage> ttSeminarImages;
 
     @OneToMany(mappedBy = "ttSeminar", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
-    private List<TTSeminarApplication> ttSeminarApplication;
+    private List<TTSeminarApplication> ttSeminarApplications;
 
-    @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
-    private TRSeminarIcon trSeminarIcon;
+    @OneToMany(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
+    private List<TRSeminarIcon> trSeminarIcons;
 
     @OneToOne(mappedBy = "ttSeminar", cascade = {CascadeType.ALL})
     private TTSeminarMailInfo ttSeminarMailInfo;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "QUESTIONNAIRE_ID")
+    private TTQuestionnaires ttQuestionnaires;
 }
